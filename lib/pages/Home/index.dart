@@ -4,6 +4,7 @@ import 'package:flutter_shop/components/Home/HmSlider.dart';
 import 'package:flutter_shop/components/Home/HmHot.dart';
 import 'package:flutter_shop/components/Home/HmSuggestion.dart';
 import 'package:flutter_shop/components/Home/Hmcategory.dart';
+import 'package:flutter_shop/viewmodels/home.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key? key}) : super(key: key);
@@ -13,12 +14,18 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  // 轮播图数据
+  final List<BannerItem> _bannerItems = [
+    BannerItem(id: '1', imgUrl: 'https://picsum.photos/seed/1/800/600'),
+    BannerItem(id: '2', imgUrl: 'https://picsum.photos/seed/2/800/600'),
+    BannerItem(id: '3', imgUrl: 'https://picsum.photos/seed/3/800/600'),
+  ];
   // 滚动容器组件
   List<Widget> _getSlivers() {
     return [
       // 使用Sliver家族组件包裹普通组件
       // 轮播图
-      SliverToBoxAdapter(child: HmSlider()),
+      SliverToBoxAdapter(child: HmSlider(bannerItems: _bannerItems)),
       // 间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 分类
