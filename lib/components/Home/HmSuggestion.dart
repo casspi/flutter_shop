@@ -88,7 +88,7 @@ class _HmSuggestionState extends State<HmSuggestion> {
                   opacity: frame == null ? 0 : 1,
                   duration: const Duration(milliseconds: 300),
                   child: Container(
-                    width: 100,
+                    width: 80,
                     height: 140,
                     color: const Color.fromARGB(255, 238, 167, 167), // 背景色
                     child: child,

@@ -19,9 +19,20 @@ class _HomeViewState extends State<HomeView> {
   List<BannerItem> _bannerItems = [];
   // 分类数据
   List<CategoryItem> _categoryItems = [];
-
   // 特惠推荐数据
   SpecialRecommend _specialRecommend = SpecialRecommend(
+    id: '',
+    title: '',
+    subTypes: [],
+  );
+  // 爆款推荐数据
+  SpecialRecommend _inVogueRecommend = SpecialRecommend(
+    id: '',
+    title: '',
+    subTypes: [],
+  );
+  // 一站买全数据
+  SpecialRecommend _oneStopRecommend = SpecialRecommend(
     id: '',
     title: '',
     subTypes: [],
@@ -51,9 +62,13 @@ class _HomeViewState extends State<HomeView> {
           child: Flex(
             direction: Axis.horizontal,
             children: [
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(result: _inVogueRecommend, type: 'hot'),
+              ),
               SizedBox(width: 10),
-              Expanded(child: HmHot()),
+              Expanded(
+                child: HmHot(result: _oneStopRecommend, type: 'step'),
+              ),
             ],
           ),
         ),
@@ -71,6 +86,8 @@ class _HomeViewState extends State<HomeView> {
     _initBannerList();
     _initCategoryList();
     _initSpecialRecommendList();
+    _initInVogueList();
+    _initOneStopList();
   }
 
   // 初始化轮播图数据
@@ -88,6 +105,18 @@ class _HomeViewState extends State<HomeView> {
   // 初始化特惠推荐数据
   void _initSpecialRecommendList() async {
     _specialRecommend = await getSpecialRecommendListApi();
+    setState(() {});
+  }
+
+  // 初始化爆款推荐数据
+  void _initInVogueList() async {
+    _inVogueRecommend = await getInVogueListApi();
+    setState(() {});
+  }
+
+  // 初始化一站买全数据
+  void _initOneStopList() async {
+    _oneStopRecommend = await getOneStopListApi();
     setState(() {});
   }
 
