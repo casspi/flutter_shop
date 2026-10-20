@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/api/home.dart';
 import 'package:flutter_shop/components/Home/HmMoreList.dart';
 import 'package:flutter_shop/components/Home/HmSlider.dart';
 import 'package:flutter_shop/components/Home/HmHot.dart';
@@ -15,10 +16,10 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // 轮播图数据
-  final List<BannerItem> _bannerItems = [
-    BannerItem(id: '1', imgUrl: 'https://picsum.photos/seed/1/800/600'),
-    BannerItem(id: '2', imgUrl: 'https://picsum.photos/seed/2/800/600'),
-    BannerItem(id: '3', imgUrl: 'https://picsum.photos/seed/3/800/600'),
+  List<BannerItem> _bannerItems = [
+    // BannerItem(id: '1', imgUrl: 'https://picsum.photos/seed/1/800/600'),
+    // BannerItem(id: '2', imgUrl: 'https://picsum.photos/seed/2/800/600'),
+    // BannerItem(id: '3', imgUrl: 'https://picsum.photos/seed/3/800/600'),
   ];
   // 滚动容器组件
   List<Widget> _getSlivers() {
@@ -55,6 +56,18 @@ class _HomeViewState extends State<HomeView> {
       // 商品列表
       HmMoreList(),
     ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initBannerList();
+  }
+
+  // 初始化轮播图数据
+  void _initBannerList() async {
+    _bannerItems = await getBannerListApi();
+    setState(() {});
   }
 
   @override
