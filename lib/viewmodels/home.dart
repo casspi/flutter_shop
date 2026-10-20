@@ -157,3 +157,31 @@ class SpecialRecommend {
   String toString() =>
       'SpecialRecommend(id: $id, title: $title, subTypes: $subTypes)';
 }
+
+// 推荐列表模型类
+class GoodDetailItem extends GoodsItem {
+  int payCount = 0;
+  GoodDetailItem({
+    required super.id,
+    required super.name,
+    required super.price,
+    required super.picture,
+    required super.orderNum,
+    required this.payCount,
+  }) : super(desc: '');
+  // 扩展一个工厂函数，从json转换为模型类
+  factory GoodDetailItem.fromJson(Map<String, dynamic> json) {
+    return GoodDetailItem(
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      price: json['price']?.toString() ?? '',
+      picture: json['picture']?.toString() ?? '',
+      orderNum: int.tryParse(json['orderNum']?.toString() ?? '0') ?? 0,
+      payCount: int.tryParse(json['payCount']?.toString() ?? '0') ?? 0,
+    );
+  }
+
+  @override
+  String toString() =>
+      'GoodDetailItem(id: $id, name: $name, desc: $desc, price: $price, picture: $picture, orderNum: $orderNum, payCount: $payCount)';
+}

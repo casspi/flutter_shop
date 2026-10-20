@@ -37,6 +37,15 @@ class _HomeViewState extends State<HomeView> {
     title: '',
     subTypes: [],
   );
+  // 推荐商品列表数据
+  List<GoodDetailItem> _recommendItems = [];
+
+  // 页码
+  int _pageNum = 1;
+  int _pageSize = 10;
+  bool _isLoading = false;
+  bool _hasMore = true; // 是否还有下一页
+
   // 滚动容器组件
   List<Widget> _getSlivers() {
     return [
@@ -76,7 +85,7 @@ class _HomeViewState extends State<HomeView> {
       // 间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 商品列表
-      HmMoreList(),
+      HmMoreList(goodsItems: _recommendItems),
     ];
   }
 
@@ -88,6 +97,17 @@ class _HomeViewState extends State<HomeView> {
     _initSpecialRecommendList();
     _initInVogueList();
     _initOneStopList();
+    _getRecommendList();
+    _registerScrollListener();
+  }
+
+  void _registerScrollListener() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels <=
+          _scrollController.position.maxScrollExtent - 50) {
+        _getRecommendList();
+      }
+    });
   }
 
   // 初始化轮播图数据
@@ -120,8 +140,31 @@ class _HomeViewState extends State<HomeView> {
     setState(() {});
   }
 
+  // 初始化商品列表数据
+  void _getRecommendList() async {
+    // 加载中或没有更多数据了，放弃请求
+    if (_isLoading || !_hasMore) {
+      return;
+    }
+    _isLoading = true;
+    int limit = _pageSize * _pageNum - 1;
+    _recommendItems = await getRecommendListApi({"limit": limit});
+    _isLoading = false;
+    setState(() {});
+    // 请求10条数据，判断是否有还有下一页数据
+    if (_recommendItems.length < limit) {
+      _hasMore = false;
+      return;
+    }
+    _pageNum++;
+  }
+
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: _getSlivers());
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: _getSlivers(),
+    );
   }
 }
