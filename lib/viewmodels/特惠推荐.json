@@ -1,0 +1,194 @@
+{
+  "code": "1",
+  "msg": "操作成功",
+  "result": {
+    "id": "897682543",
+    "title": "特惠推荐",
+    "subTypes": [
+      {
+        "id": "912000341",
+        "title": "抢先尝鲜",
+        "goodsItems": {
+          "counts": 459,
+          "pageSize": 10,
+          "pages": 46,
+          "page": 1,
+          "items": [
+            {
+              "id": "1750713979417657346",
+              "name": "NEOJIN 无鼻托舒适商务休闲近视眼镜框 NJ3101 绿卡其色",
+              "desc": "无鼻托，侧垫支撑舒适镜框",
+              "price": "1493.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/239083/p3.png",
+              "orderNum": 11
+            },
+            {
+              "id": "1750713979509932036",
+              "name": "Fleep 无钢圈舒适棉质背心式文胸内衣 肤色",
+              "desc": "轻薄干爽柔软亲肤",
+              "price": "271.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216731/p1.png",
+              "orderNum": 13
+            },
+            {
+              "id": "1750713979526709254",
+              "name": "Fleep 柔软棉质三角内裤 深蓝色",
+              "desc": "舒适棉质弹力贴合",
+              "price": "201.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216792/p3.png",
+              "orderNum": 13
+            },
+            {
+              "id": "1750713979316994056",
+              "name": "CA4LA BER-BASQ NAVY ONESIZE 货号:NOX00651",
+              "desc": "经典设计，舒适贴合",
+              "price": "644.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/254362/p1.png",
+              "orderNum": 10
+            },
+            {
+              "id": "1750713979535097857",
+              "name": "Fleep 柔软纯棉蕾丝内裤 象牙米色",
+              "desc": "棉柔舒适，健康亲肤",
+              "price": "201.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216857/p4.png",
+              "orderNum": 10
+            },
+            {
+              "id": "1750713979308605445",
+              "name": "OVERRIDE 羊毛混纺针织条带帽橙色 57cm～59cm(98)",
+              "desc": "温暖柔软，色彩亮丽",
+              "price": "628.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/255999/p1.png",
+              "orderNum": 11
+            },
+            {
+              "id": "1379052170040578049",
+              "name": "极光限定 珠光蓝珐琅锅",
+              "desc": null,
+              "price": "199.00",
+              "picture": "http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-05/7f483771-6831-4a7a-abdb-2625acb755f3.png",
+              "orderNum": 929
+            },
+            {
+              "id": "1750713978864009216",
+              "name": "LULULEMON Swiftly Relaxed女士瑜伽健身长袖T恤 白色/白色",
+              "desc": "透气抗菌，舒适不翻卷",
+              "price": "699.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/258038/p1.png",
+              "orderNum": 29
+            },
+            {
+              "id": "1750713979300216839",
+              "name": "OVERRIDE 条纹拼色毛绒休闲帽绿色 58cm(58)",
+              "desc": "时尚休闲，绿意盎然",
+              "price": "688.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/255972/p1.png",
+              "orderNum": 17
+            },
+            {
+              "id": "1750713979119861761",
+              "name": "Granmauve 轻松舒适蕾丝平角内裤 日本制 米粉色",
+              "desc": "穿着舒适，打理简单。",
+              "price": "214.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/242549/p1.png",
+              "orderNum": 12
+            }
+          ]
+        }
+      },
+      {
+        "id": "912000342",
+        "title": "新品预告",
+        "goodsItems": {
+          "counts": 459,
+          "pageSize": 10,
+          "pages": 46,
+          "page": 1,
+          "items": [
+            {
+              "id": "1750713979300216839",
+              "name": "OVERRIDE 条纹拼色毛绒休闲帽绿色 58cm(58)",
+              "desc": "时尚休闲，绿意盎然",
+              "price": "688.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/255972/p1.png",
+              "orderNum": 17
+            },
+            {
+              "id": "1750713979509932036",
+              "name": "Fleep 无钢圈舒适棉质背心式文胸内衣 肤色",
+              "desc": "轻薄干爽柔软亲肤",
+              "price": "271.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216731/p1.png",
+              "orderNum": 13
+            },
+            {
+              "id": "1750713979417657346",
+              "name": "NEOJIN 无鼻托舒适商务休闲近视眼镜框 NJ3101 绿卡其色",
+              "desc": "无鼻托，侧垫支撑舒适镜框",
+              "price": "1493.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/239083/p3.png",
+              "orderNum": 11
+            },
+            {
+              "id": "1750713979308605445",
+              "name": "OVERRIDE 羊毛混纺针织条带帽橙色 57cm～59cm(98)",
+              "desc": "温暖柔软，色彩亮丽",
+              "price": "628.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/255999/p1.png",
+              "orderNum": 11
+            },
+            {
+              "id": "1750713979316994056",
+              "name": "CA4LA BER-BASQ NAVY ONESIZE 货号:NOX00651",
+              "desc": "经典设计，舒适贴合",
+              "price": "644.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/254362/p1.png",
+              "orderNum": 10
+            },
+            {
+              "id": "1750713979526709254",
+              "name": "Fleep 柔软棉质三角内裤 深蓝色",
+              "desc": "舒适棉质弹力贴合",
+              "price": "201.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216792/p3.png",
+              "orderNum": 13
+            },
+            {
+              "id": "1750713979535097857",
+              "name": "Fleep 柔软纯棉蕾丝内裤 象牙米色",
+              "desc": "棉柔舒适，健康亲肤",
+              "price": "201.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/216857/p4.png",
+              "orderNum": 10
+            },
+            {
+              "id": "1750713978864009216",
+              "name": "LULULEMON Swiftly Relaxed女士瑜伽健身长袖T恤 白色/白色",
+              "desc": "透气抗菌，舒适不翻卷",
+              "price": "699.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/258038/p1.png",
+              "orderNum": 29
+            },
+            {
+              "id": "1750713979119861761",
+              "name": "Granmauve 轻松舒适蕾丝平角内裤 日本制 米粉色",
+              "desc": "穿着舒适，打理简单。",
+              "price": "214.00",
+              "picture": "https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/meikou/242549/p1.png",
+              "orderNum": 12
+            },
+            {
+              "id": "1379052170040578049",
+              "name": "极光限定 珠光蓝珐琅锅",
+              "desc": null,
+              "price": "199.00",
+              "picture": "http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-05/7f483771-6831-4a7a-abdb-2625acb755f3.png",
+              "orderNum": 929
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -16,11 +16,16 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   // 轮播图数据
-  List<BannerItem> _bannerItems = [
-    // BannerItem(id: '1', imgUrl: 'https://picsum.photos/seed/1/800/600'),
-    // BannerItem(id: '2', imgUrl: 'https://picsum.photos/seed/2/800/600'),
-    // BannerItem(id: '3', imgUrl: 'https://picsum.photos/seed/3/800/600'),
-  ];
+  List<BannerItem> _bannerItems = [];
+  // 分类数据
+  List<CategoryItem> _categoryItems = [];
+
+  // 特惠推荐数据
+  SpecialRecommend _specialRecommend = SpecialRecommend(
+    id: '',
+    title: '',
+    subTypes: [],
+  );
   // 滚动容器组件
   List<Widget> _getSlivers() {
     return [
@@ -30,11 +35,13 @@ class _HomeViewState extends State<HomeView> {
       // 间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 分类
-      SliverToBoxAdapter(child: HmCategory()),
+      SliverToBoxAdapter(child: HmCategory(categoryItems: _categoryItems)),
       // 间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 搜索建议
-      SliverToBoxAdapter(child: HmSuggestion()),
+      SliverToBoxAdapter(
+        child: HmSuggestion(specialRecommend: _specialRecommend),
+      ),
       // 间隙
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       // 商品列表
@@ -62,11 +69,25 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _initBannerList();
+    _initCategoryList();
+    _initSpecialRecommendList();
   }
 
   // 初始化轮播图数据
   void _initBannerList() async {
     _bannerItems = await getBannerListApi();
+    setState(() {});
+  }
+
+  // 初始化分类数据
+  void _initCategoryList() async {
+    _categoryItems = await getCategoryListApi();
+    setState(() {});
+  }
+
+  // 初始化特惠推荐数据
+  void _initSpecialRecommendList() async {
+    _specialRecommend = await getSpecialRecommendListApi();
     setState(() {});
   }
 
