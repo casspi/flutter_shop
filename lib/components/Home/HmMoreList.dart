@@ -14,12 +14,23 @@ class _HmMoreListState extends State<HmMoreList> {
   Widget _buildItem(GoodDetailItem item) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: AspectRatio(
               aspectRatio: 1.0,
-              child: Image.network(item.picture, fit: BoxFit.cover),
+              child: Image.network(
+                item.picture,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    Icon(Icons.error, color: Colors.red, size: 24),
+                // 图片加载失败时显示的图标
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return Container(color: Colors.grey, width: 160, height: 160);
+                },
+              ),
             ),
           ),
           SizedBox(height: 6),
@@ -29,7 +40,7 @@ class _HmMoreListState extends State<HmMoreList> {
               item.name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black87, fontSize: 20),
+              style: TextStyle(color: Colors.black87, fontSize: 16),
             ),
           ),
           SizedBox(height: 6),

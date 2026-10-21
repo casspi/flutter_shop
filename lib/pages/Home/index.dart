@@ -5,6 +5,7 @@ import 'package:flutter_shop/components/Home/HmSlider.dart';
 import 'package:flutter_shop/components/Home/HmHot.dart';
 import 'package:flutter_shop/components/Home/HmSuggestion.dart';
 import 'package:flutter_shop/components/Home/Hmcategory.dart';
+import 'package:flutter_shop/utils/ToastUtils.dart';
 import 'package:flutter_shop/viewmodels/home.dart';
 
 class HomeView extends StatefulWidget {
@@ -92,17 +93,17 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    _initBannerList();
-    _initCategoryList();
-    _initSpecialRecommendList();
-    _initInVogueList();
-    _initOneStopList();
-    _getRecommendList();
     _registerScrollListener();
+    Future.microtask(() {
+      _paddingTop = 50;
+      setState(() {});
+      _key.currentState?.show();
+    });
   }
 
   void _registerScrollListener() {
     _scrollController.addListener(() {
+      // 滚动到最底部时，加载下一页数据
       if (_scrollController.position.pixels <=
           _scrollController.position.maxScrollExtent - 50) {
         _getRecommendList();
@@ -111,37 +112,32 @@ class _HomeViewState extends State<HomeView> {
   }
 
   // 初始化轮播图数据
-  void _initBannerList() async {
+  Future<void> _initBannerList() async {
     _bannerItems = await getBannerListApi();
-    setState(() {});
   }
 
   // 初始化分类数据
-  void _initCategoryList() async {
+  Future<void> _initCategoryList() async {
     _categoryItems = await getCategoryListApi();
-    setState(() {});
   }
 
   // 初始化特惠推荐数据
-  void _initSpecialRecommendList() async {
+  Future<void> _initSpecialRecommendList() async {
     _specialRecommend = await getSpecialRecommendListApi();
-    setState(() {});
   }
 
   // 初始化爆款推荐数据
-  void _initInVogueList() async {
+  Future<void> _initInVogueList() async {
     _inVogueRecommend = await getInVogueListApi();
-    setState(() {});
   }
 
   // 初始化一站买全数据
-  void _initOneStopList() async {
+  Future<void> _initOneStopList() async {
     _oneStopRecommend = await getOneStopListApi();
-    setState(() {});
   }
 
   // 初始化商品列表数据
-  void _getRecommendList() async {
+  Future<void> _getRecommendList() async {
     // 加载中或没有更多数据了，放弃请求
     if (_isLoading || !_hasMore) {
       return;
@@ -159,12 +155,45 @@ class _HomeViewState extends State<HomeView> {
     _pageNum++;
   }
 
+  Future<void> _onRefresh() async {
+    _pageNum = 1;
+    _hasMore = true;
+    _isLoading = false;
+    try {
+      await _initBannerList();
+      await _initCategoryList();
+      await _initSpecialRecommendList();
+      await _initInVogueList();
+      await _initOneStopList();
+      await _getRecommendList();
+    } catch (e) {
+      if (!mounted) return;
+      ToastUtils.showToast(context, '刷新失败，请稍后重试');
+      return;
+    }
+    _paddingTop = 0;
+    setState(() {});
+    if (!mounted) return;
+    ToastUtils.showToast(context, '刷新成功');
+  }
+
   final ScrollController _scrollController = ScrollController();
+  final GlobalKey<RefreshIndicatorState> _key =
+      GlobalKey<RefreshIndicatorState>();
+  double _paddingTop = 0;
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: _getSlivers(),
+    return RefreshIndicator(
+      key: _key,
+      onRefresh: _onRefresh,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        padding: EdgeInsets.only(top: _paddingTop),
+        child: CustomScrollView(
+          controller: _scrollController,
+          slivers: _getSlivers(),
+        ),
+      ),
     );
   }
 }
