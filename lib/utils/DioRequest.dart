@@ -29,27 +29,40 @@ class DioRequest {
           handler.reject(DioException(requestOptions: response.requestOptions));
         },
         onError: (error, handler) {
-          return handler.reject(error);
+          return handler.reject(
+            DioException(
+              requestOptions: error.requestOptions,
+              message: error.response?.data['msg'] ?? " ",
+            ),
+          );
         },
       ),
     );
   }
 
-  get(String url, {Map<String, dynamic>? params}) {
+  Future<dynamic> get(String url, {Map<String, dynamic>? params}) {
     return _handleResponse(_dio.get(url, queryParameters: params));
   }
 
+  Future<dynamic> post(String url, {Map<String, dynamic>? data}) {
+    return _handleResponse(_dio.post(url, data: data));
+  }
+
   // 进一步处理返回结果
-  _handleResponse(Future<Response<dynamic>> task) async {
+  Future<dynamic> _handleResponse(Future<Response<dynamic>> task) async {
     try {
       Response<dynamic> response = await task;
       final data = response.data as Map<String, dynamic>; // data 为接口真实返回数据
       if (data['code'] != GlobalConstants.SUCCESS_CODE) {
-        throw DioException(requestOptions: response.requestOptions);
+        throw DioException(
+          requestOptions: response.requestOptions,
+          message: data['msg'] ?? "加载失败",
+        );
       }
       return data['result'];
     } catch (e) {
-      throw Exception(e);
+      // throw Exception(e);
+      rethrow;
     }
   }
 }

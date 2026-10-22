@@ -185,3 +185,32 @@ class GoodDetailItem extends GoodsItem {
   String toString() =>
       'GoodDetailItem(id: $id, name: $name, desc: $desc, price: $price, picture: $picture, orderNum: $orderNum, payCount: $payCount)';
 }
+
+class GoodsDetailsItems {
+  int counts;
+  int pageSize;
+  int pages;
+  int page;
+  List<GoodDetailItem> items;
+  GoodsDetailsItems({
+    required this.counts,
+    required this.pageSize,
+    required this.pages,
+    required this.page,
+    required this.items,
+  });
+  // 扩展一个工厂函数，从json转换为模型类
+  factory GoodsDetailsItems.fromJson(Map<String, dynamic> json) {
+    return GoodsDetailsItems(
+      counts: json['counts'] ?? 0,
+      pageSize: json['pageSize'] ?? 0,
+      pages: json['pages'] ?? 0,
+      page: json['page'] ?? 1,
+      items:
+          (json['items'] as List?)
+              ?.map((e) => GoodDetailItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+  }
+}

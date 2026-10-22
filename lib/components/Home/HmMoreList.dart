@@ -49,30 +49,35 @@ class _HmMoreListState extends State<HmMoreList> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text.rich(
-                  TextSpan(
-                    text: "￥${item.price}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    children: [
-                      TextSpan(text: ' '),
-                      TextSpan(
-                        text: '${item.price}',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          decoration: TextDecoration.lineThrough,
-                        ),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: "￥${item.price}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
                       ),
-                    ],
+                      children: [
+                        TextSpan(text: ' '),
+                        TextSpan(
+                          text: item.price,
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                SizedBox(width: 4),
                 Text(
                   '${item.payCount}人已购买',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontSize: 11),
                 ),
               ],
             ),
