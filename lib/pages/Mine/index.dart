@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/api/mine.dart';
 import 'package:flutter_shop/components/Home/HmMoreList.dart';
 import 'package:flutter_shop/components/Mine/HmGuess.dart';
+import 'package:flutter_shop/stotes/TokenManager.dart';
 import 'package:flutter_shop/stotes/UserController.dart';
 import 'package:flutter_shop/utils/ToastUtils.dart';
 import 'package:flutter_shop/viewmodels/home.dart';
+import 'package:flutter_shop/viewmodels/user.dart';
 import 'package:get/get.dart';
 
 class MineView extends StatefulWidget {
@@ -16,6 +18,46 @@ class MineView extends StatefulWidget {
 
 class _MineViewState extends State<MineView> {
   final UserController _userController = Get.find();
+
+  Widget _logoutButton() {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () async {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('提示'),
+              content: Text('确认退出登录吗？'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('取消'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    // 清除Getx
+                    _userController.updateUserInfo(UserInfo.fromJson({}));
+                    // 清除Token
+                    await tokenManager.removeToken();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('确认'),
+                ),
+              ],
+            ),
+          );
+        },
+        child: Text(
+          '退出登录',
+          textAlign: TextAlign.end,
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
   List<Widget> _getSlivers() {
     return [
       SliverToBoxAdapter(
@@ -23,7 +65,7 @@ class _MineViewState extends State<MineView> {
           height: 260,
           width: double.infinity,
           child: Padding(
-            padding: EdgeInsets.only(left: 40),
+            padding: EdgeInsets.symmetric(horizontal: 40),
             child: Row(
               children: [
                 Icon(Icons.person),
@@ -42,6 +84,11 @@ class _MineViewState extends State<MineView> {
                     ),
                   );
                 }),
+                Obx(
+                  () => _userController.user.value.id.isEmpty
+                      ? Text('')
+                      : _logoutButton(),
+                ),
               ],
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shop/api/user.dart';
 import 'package:flutter_shop/stotes/TokenManager.dart';
 import 'package:flutter_shop/stotes/UserController.dart';
+import 'package:flutter_shop/utils/LoadingDialog.dart';
 import 'package:flutter_shop/utils/ToastUtils.dart';
 import 'package:get/get.dart';
 
@@ -127,6 +128,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _login() async {
+    LoadingDialog.show(context, message: '登录中...');
     try {
       // 调用接口
       final res = await loginApi({
@@ -141,6 +143,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pop(context);
     } catch (e) {
       ToastUtils.showToast(context, (e as DioException).message, width: 200);
+    } finally {
+      LoadingDialog.hide(context);
     }
   }
 
