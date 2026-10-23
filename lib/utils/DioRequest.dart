@@ -1,6 +1,7 @@
 // 基于Dio的请求工具类
 import 'package:dio/dio.dart';
 import 'package:flutter_shop/constants/index.dart';
+import 'package:flutter_shop/stotes/TokenManager.dart';
 
 class DioRequest {
   static Dio _dio = Dio();
@@ -18,6 +19,11 @@ class DioRequest {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (request, handler) {
+          // 每次请求前，添加token
+          if (tokenManager.getToken().isNotEmpty) {
+            request.headers['Authorization'] =
+                "Bearer ${tokenManager.getToken()}";
+          }
           handler.next(request);
         },
         onResponse: (response, handler) {

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/api/user.dart';
+import 'package:flutter_shop/stotes/TokenManager.dart';
 import 'package:flutter_shop/stotes/UserController.dart';
 import 'package:flutter_shop/utils/ToastUtils.dart';
 import 'package:get/get.dart';
@@ -134,6 +135,8 @@ class _LoginPageState extends State<LoginPage> {
       });
       // 登录成功后，更新用户信息
       _userController.updateUserInfo(res);
+      await tokenManager.setToken(res.token);
+      // 登录成功后，跳转到首页
       ToastUtils.showToast(context, '登录成功');
       Navigator.pop(context);
     } catch (e) {

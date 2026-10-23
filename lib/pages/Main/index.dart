@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/api/user.dart';
 import 'package:flutter_shop/pages/Cart/index.dart';
 import 'package:flutter_shop/pages/Category/index.dart';
 import 'package:flutter_shop/pages/Home/index.dart';
 import 'package:flutter_shop/pages/Mine/index.dart';
+import 'package:flutter_shop/stotes/TokenManager.dart';
+import 'package:flutter_shop/stotes/UserController.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -56,6 +61,20 @@ class _MainPageState extends State<MainPage> {
       Center(child: CartView()),
       Center(child: MineView()),
     ];
+  }
+
+  final UserController _userController = Get.put(UserController());
+  @override
+  void initState() {
+    super.initState();
+    _initUser();
+  }
+
+  _initUser() async {
+    await tokenManager.init();
+    if (tokenManager.getToken().isNotEmpty) {
+      _userController.updateUserInfo(await getUserInfoApi());
+    }
   }
 
   @override
