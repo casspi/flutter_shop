@@ -55,7 +55,7 @@ class _HmMoreListState extends State<HmMoreList> {
                       text: "￥${item.price}",
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.w800,
                       ),
                       children: [
@@ -64,7 +64,7 @@ class _HmMoreListState extends State<HmMoreList> {
                           text: item.price,
                           style: TextStyle(
                             color: Colors.grey,
-                            fontSize: 12,
+                            fontSize: 10,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
@@ -74,10 +74,10 @@ class _HmMoreListState extends State<HmMoreList> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                SizedBox(width: 4),
+                SizedBox(width: 2),
                 Text(
                   '${item.payCount}人已购买',
-                  style: TextStyle(color: Colors.grey, fontSize: 11),
+                  style: TextStyle(color: Colors.grey, fontSize: 8),
                 ),
               ],
             ),
