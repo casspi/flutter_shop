@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_shop/api/user.dart';
 import 'package:flutter_shop/pages/Cart/index.dart';
 import 'package:flutter_shop/pages/Category/index.dart';
@@ -70,7 +71,7 @@ class _MainPageState extends State<MainPage> {
     _initUser();
   }
 
-  _initUser() async {
+  Future<void> _initUser() async {
     await tokenManager.init();
     if (tokenManager.getToken().isNotEmpty) {
       _userController.updateUserInfo(await getUserInfoApi());
@@ -79,23 +80,37 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: IndexedStack(index: _currentIndex, children: _pageList()),
-        ),
+    // 首页顶部是沉浸式深色轮播图，状态栏（安全区）文字用浅色；
+    // 其余 Tab 页面背景为浅色，状态栏文字用深色，保证可读性
+    final bool isHome = _currentIndex == 0;
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      // 在这个页面生效的样式
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        // Android：状态栏图标/文字亮度
+        statusBarIconBrightness: isHome ? Brightness.light : Brightness.dark,
+        // iOS：statusBarBrightness 表示状态栏背景亮度，深色背景对应浅色文字
+        statusBarBrightness: isHome ? Brightness.dark : Brightness.light,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.orangeAccent,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        items: _bottomNavigationBarItems(),
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          _currentIndex = index;
-          setState(() {});
-        },
+      child: Scaffold(
+        body: IndexedStack(index: _currentIndex, children: _pageList()),
+        // body: SafeArea(
+        //   child: Center(
+        //     child: IndexedStack(index: _currentIndex, children: _pageList()),
+        //   ),
+        // ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.orangeAccent,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+          items: _bottomNavigationBarItems(),
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            _currentIndex = index;
+            setState(() {});
+          },
+        ),
       ),
     );
   }

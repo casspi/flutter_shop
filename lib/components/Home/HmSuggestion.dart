@@ -49,7 +49,7 @@ class _HmSuggestionState extends State<HmSuggestion> {
   // 构建左侧内容
   Widget _buildLeftContent() {
     return Container(
-      width: 100,
+      width: 80,
       height: 140,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -65,20 +65,18 @@ class _HmSuggestionState extends State<HmSuggestion> {
   List<Widget> _buildChildrenList() {
     List<GoodsItem> goodsItems = _getDisplayItems();
     return goodsItems.map((item) {
-      return Column(
+      return Expanded(child: Column(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 100,
                   height: 140,
                   color: const Color.fromARGB(255, 238, 167, 167), // 背景色
                 );
               },
               item.picture,
-              width: 100,
               height: 140,
               fit: BoxFit.cover,
               // 图片加载中显示背景色
@@ -110,7 +108,7 @@ class _HmSuggestionState extends State<HmSuggestion> {
             ),
           ),
         ],
-      );
+      ));
     }).toList();
   }
 
@@ -140,6 +138,7 @@ class _HmSuggestionState extends State<HmSuggestion> {
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    spacing: 5,
                     children: _buildChildrenList(),
                   ),
                 ),
